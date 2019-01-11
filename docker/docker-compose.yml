@@ -6,6 +6,6 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./magento2/:/usr/local/apache2/htdocs/magento2/
+      - ./magento2/:/var/www/html/magento2/
     networks:
       - network-back
