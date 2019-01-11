@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  apache2:
+    build: apache2
+    ports:
+      - "80:80"
+    volumes:
+      - ./magento2/:/usr/local/apache2/htdocs/magento2/
+    networks:
+      - network-back
