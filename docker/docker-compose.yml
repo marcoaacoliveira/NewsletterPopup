@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  apache2:
+    build: apache2
+    container_name: newsletter_apache2
+    ports:
+      - "80:80"
+    volumes:
+      - ./magento2:/usr/local/apache2/htdocs/
+  #percona:
+  #php:
+  #redis:
