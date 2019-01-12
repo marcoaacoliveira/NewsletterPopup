@@ -1,13 +1,13 @@
 version: '3'
 
 services:
-  apache2:
-    build: apache2
-    container_name: red_apache2
+  server:
+    build: server
+    container_name: red_server
     ports:
       - "80:80"
     volumes:
-      - ./magento2/:/htdocs/magento2/
+      - ./magento2/:/var/www/html/magento2/
     networks:
       - network-back
 
@@ -21,14 +21,6 @@ services:
     environment:
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: root
-    networks:
-      - network-back
-
-  php:
-    build: php
-    container_name: red_php
-    volumes:
-      - ./magento2/:/htdocs/magento2/
     networks:
       - network-back
 

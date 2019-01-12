@@ -1,4 +1,6 @@
-FROM php:7.1-fpm
+FROM php:7.1-apache
+
+WORKDIR /var/www/html
 
 RUN apt-get update \
   && apt-get install -y \
@@ -49,6 +51,8 @@ RUN curl -sS https://getcomposer.org/installer | \
 COPY ./install-magento-2.sh /install-magento-2.sh
 RUN chmod +x /install-magento-2.sh
 
-WORKDIR /htdocs/
+COPY ./conf/magento2.conf /etc/apache2/sites-available/magento2.conf
+RUN ln -s /etc/apache2/sites-available/magento2.conf /etc/apache2/sites-enabled/magento2.conf
 
-CMD ["php-fpm"]
+RUN a2enmod rewrite \
+	&& a2enmod headers
