@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  apache2:
+    build: apache2
+    container_name: red_apache2
+    ports:
+      - "80:80"
+    volumes:
+      - ./magento2/:/htdocs/magento2/
+    networks:
+      - network-back
+
+  db:
+    image: mariadb
+    container_name: red_mariadb
+    volumes:
+      - ./dumps:/dumps
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - network-back
+
+  php:
+    build: php
+    container_name: red_php
+    volumes:
+      - ./magento2/:/htdocs/magento2/
+    networks:
+      - network-back
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: red_mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - network-back
+
+  redis:
+    image: redis
+    container_name: red_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - network-back
+
+networks:
+  network-back:
+    driver: bridge
