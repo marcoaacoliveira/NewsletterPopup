@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.2-apache
 
 WORKDIR /var/www/html
 
@@ -7,13 +7,14 @@ RUN apt-get update \
     libfreetype6-dev \
     libicu-dev \
     libjpeg62-turbo-dev \
-    libmcrypt-dev \
     libpng-dev \
     libxslt1-dev \
     sendmail-bin \
     sendmail \
-    mcrypt \
     unzip
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y libmcrypt-dev \
+    && pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt.so
 
 RUN docker-php-ext-configure \
   gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
@@ -27,7 +28,6 @@ RUN docker-php-ext-install \
   xsl \
   zip \
   soap \
-  mcrypt \
   bcmath
 
 # Install MailHog
