@@ -48,8 +48,7 @@ class Save extends NewAction
         EmailValidator $emailValidator = null,
         Validator $formKeyValidator,
         JsonFactory $jsonFactory
-    )
-    {
+    ) {
 
         $this->formKeyValidator = $formKeyValidator;
         $this->jsonFactory = $jsonFactory;
@@ -102,7 +101,11 @@ class Save extends NewAction
                 return $result->setData($result_json);
             }
 
-            $status = (int)$this->_subscriberFactory->create()->subscribe($email);
+            $status = (int)$this->_subscriberFactory->create()->subscribe(
+                $email,
+                $request->getParam('name'),
+                $request->getParam('phone')
+            );
             $result_json["saved"]="true";
             $result_json["message"]=$status;
             return $result->setData($result_json);
