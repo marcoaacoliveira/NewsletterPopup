@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Redstage\NewsletterPopup\Block\Popup">
+        <plugin name="Redstage_NewsletterPopup_Cookie" type="Redstage\NewsletterPopup\Plugin\CookiePlugin" sortOrder="1" disabled="false" />
+    </type>
+</config>
