@@ -8,12 +8,12 @@ use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Data\Form\FormKey\Validator;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Validator\EmailAddress as EmailValidator;
 use Magento\Newsletter\Controller\Subscriber\NewAction;
+use Magento\Newsletter\Model\Subscriber;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Newsletter\Model\Subscriber;
 
 /**
  * Action to save requests to Newsletters
@@ -106,8 +106,11 @@ class Save extends NewAction
                 $request->getParam('name'),
                 $request->getParam('phone')
             );
-            $result_json["saved"]="true";
-            $result_json["message"]=$status;
+            $result_json["saved"] = "true";
+            if ($status == Subscriber::STATUS_NOT_ACTIVE) {
+                $result_json["message"] = __("Waiting for approval");
+            }
+            $result_json["message"] = __("Subscribed successfully");
             return $result->setData($result_json);
         } catch (LocalizedException $e) {
             $result_json["message"] = __('There was a problem with the subscription: %1', $e->getMessage());
