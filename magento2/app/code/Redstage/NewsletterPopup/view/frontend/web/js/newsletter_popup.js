@@ -33,7 +33,7 @@ require(
                         if(response.saved==="true") {
                             setTimeout(function () {
                                 $("#popup-modal").modal("closeModal");
-                            },4000);
+                            },3000);
                         }
                     });
                 }
