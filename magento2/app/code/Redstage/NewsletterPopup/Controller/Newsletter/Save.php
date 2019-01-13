@@ -24,7 +24,6 @@ class Save extends NewAction
     protected $formKeyValidator;
     protected $jsonFactory;
 
-
     /**
      * Initialize depedencies.
      *
@@ -72,8 +71,6 @@ class Save extends NewAction
     {
         $request = $this->getRequest();
         $result = $this->jsonFactory->create();
-        $result_json = ['saved' => "false"];
-
         // Check validate form key
         if (!$this->formKeyValidator->validate($request)) {
             $result_json["message"] = __("Something Wrong, try again later");
