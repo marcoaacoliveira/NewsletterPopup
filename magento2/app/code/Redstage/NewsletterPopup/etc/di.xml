@@ -2,4 +2,5 @@
     <type name="Redstage\NewsletterPopup\Block\Popup">
         <plugin name="Redstage_NewsletterPopup_Cookie" type="Redstage\NewsletterPopup\Plugin\CookiePlugin" sortOrder="1" disabled="false" />
     </type>
+    <preference for="Magento\Newsletter\Model\Subscriber" type="Redstage\NewsletterPopup\Model\Subscriber"></preference>
 </config>

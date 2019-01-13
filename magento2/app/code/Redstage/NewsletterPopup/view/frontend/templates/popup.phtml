@@ -1,3 +1,8 @@
+<?php
+/**
+ * Redstage\NewsletterPopup\Block\Popup $block
+ */
+?>
 <div data-mage-init='{"newsletter_popup": {}}'>
 </div>
 
@@ -10,5 +15,6 @@
         <input name="name" type="text">
         <label for="name"><?php echo __('Phone'); ?></label>
         <input name="phone" type="text">
+        <?php echo $block->getBlockHtml('formkey'); ?>
     </form>
 </div>
