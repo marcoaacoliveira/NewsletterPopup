@@ -30,6 +30,9 @@ RUN docker-php-ext-install \
   soap \
   bcmath
 
+
+COPY ./custom.ini /usr/local/etc/php/conf.d/custom.ini
+
 # Install MailHog
 COPY ./mailhog.ini /usr/local/etc/php/conf.d/mailhog.ini
 
